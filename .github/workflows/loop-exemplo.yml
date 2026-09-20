@@ -1,0 +1,39 @@
+# Loop de tempo de exemplo. Roda em horário marcado, escreve em saida/, abre PR.
+# Nunca faz push em main: rotina propõe, pessoa aprova.
+# Antes de usar: (1) confira a versão atual da action em https://github.com/anthropics/claude-code-action
+# (2) crie o secret ANTHROPIC_API_KEY neste repositório (chave da EMPRESA, com teto de gasto; ver docs/quem-paga-o-token.md)
+# (3) troque o nome, o horário e o prompt.
+name: loop-exemplo
+on:
+  schedule:
+    - cron: "0 10 * * 1-5"   # 07h BRT, dias úteis (o cron do GitHub é em UTC)
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  rodar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rodar o loop
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Você é uma ROTINA deste harness (leia "Quem lê este arquivo" no CLAUDE.md: rotina não precisa de plano).
+            Tarefa: <o que este loop faz. Ex.: ler as fontes listadas no CLAUDE.md e escrever saida/relatorio-diario.md>.
+            Se alguma ação para fora for necessária, NÃO execute: escreva o pedido em aprovar/ no formato de aprovar/README.md.
+            Não toque em nada fora de saida/ e aprovar/.
+          claude_args: "--max-turns 30 --allowedTools Read,Write,Edit,Grep,Glob"
+      - name: Abrir PR com a saída
+        run: |
+          git config user.name "loop-exemplo"
+          git config user.email "loop@users.noreply.github.com"
+          git checkout -b "loop/$(date -u +%Y-%m-%d-%H%M)"
+          git add saida/ aprovar/
+          git commit -m "loop-exemplo: saída de $(date -u +%Y-%m-%d) [skip ci]" || { echo "nada a commitar"; exit 0; }
+          git push origin HEAD
+          gh pr create --fill --title "loop-exemplo · $(date -u +%Y-%m-%d)" --body "Saída da rotina. Se houver arquivo em aprovar/, alguém decide."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

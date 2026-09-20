@@ -1,0 +1,38 @@
+{
+  "$comment": "Permissões deste harness. Padrão restritivo de propósito: tira daqui só o que este harness precisa de verdade. Sintaxe: https://code.claude.com/docs/en/settings#permissions",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Grep",
+      "Glob",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout -b:*)",
+      "Bash(git push origin HEAD:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)"
+    ],
+    "deny": [
+      "Read(../**)",
+      "Read(~/**)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/secrets*)",
+      "Write(../**)",
+      "Edit(../**)",
+      "Bash(git push origin main:*)",
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(rm -rf:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "WebFetch",
+      "WebSearch"
+    ]
+  }
+}

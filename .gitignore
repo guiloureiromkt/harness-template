@@ -1,0 +1,7 @@
+.env
+.env.*
+**/secrets*
+node_modules/
+.cycle/work/**/*.png
+.cycle/work/**/*.mp4
+.cycle/release-approval
