@@ -1,5 +1,7 @@
 # aprovar/ · a fila de aprovação
 
+> A skill que opera esta fila é a `mentoria:fila-de-aprovacao` (instala com `/plugin install mentoria@mentoria-skills`): ela propõe, executa só o aprovado e chama um verificador em contexto separado. `python3 <caminho-da-skill>/scripts/fila.py` lista a fila sem gastar token.
+
 Todo arquivo aqui é um pedido de ação para fora, escrito por um loop ou por um agente. Ninguém executa nada a partir desta pasta.
 
 ## Formato do arquivo

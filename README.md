@@ -12,12 +12,13 @@ Ele existe porque montar o esqueleto não ensina nada e custa uma tarde. O que e
 |---|---|---|
 | `CLAUDE.md` | O arquivo mãe do harness: propósito, quem trabalha dentro, de onde bebe, quais skills pode usar, e a regra de quem lê este arquivo (construção × rotina) | **Sim**, é o principal |
 | `.claude/settings.json` | O que o Claude pode e não pode fazer aqui (ferramentas, comandos, pastas). É a permissão em código | **Sim**, revisa a lista de negados |
-| `aprovar/` e `aprovado/` | A fila de aprovação: o loop deixa o que quer fazer em `aprovar/`, uma pessoa escreve "aprovado" e move; só então a ação acontece | Não, só usa |
+| `aprovar/` e `aprovado/` | A fila de aprovação: o loop deixa o que quer fazer em `aprovar/`, uma pessoa escreve "aprovado" e move; só então a ação acontece. A skill `mentoria:fila-de-aprovacao` opera a fila | Não, só usa |
 | `saida/` | O que este harness publica para os outros lerem. Outro harness nunca lê o teu repositório inteiro, só esta pasta | Não, só usa |
 | `skills-permitidas/` | Um arquivo por skill do teu arsenal que este harness pode invocar, com o que ela faz aqui | **Sim**, uma linha por skill |
 | `.github/workflows/loop-exemplo.yml` | Um loop de tempo de exemplo: roda em horário marcado, escreve em `saida/`, abre PR. Não faz push em `main` | Copia e adapta |
 | `docs/quem-paga-o-token.md` | A regra de custo: quem aperta o botão paga com a chave do harness, não com a assinatura de quem construiu | Lê uma vez |
 | `docs/acesso-e-permissao.md` | As três camadas de acesso (repositório · Claude · mundo) e onde cada uma se configura | Lê uma vez |
+| `docs/checklist-datado.md` e `docs/loop-do-dia.md` | O mês como checklist com dia marcado (modelo de conciliação financeira preenchido) e o prompt do loop diário que lê o checklist, faz o passo do dia e para em qualquer passo que pague | Copia e adapta |
 
 ## Como usar
 
